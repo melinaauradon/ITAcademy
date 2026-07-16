@@ -1,0 +1,101 @@
+product_id,name,price,colour,total_sold
+52,riverlands the duel,"31,52",#727272,2654
+29,Tully maester Tarly,"167,2",#111111,2635
+21,duel Direwolf,"96,9",#e2e2e2,2609
+16,the duel warden,"180,91",#666666,2608
+66,mustafar jinn,"2,12",#545454,2601
+87,sith Jade,"96,26",#e2e2e2,2598
+48,rock Renly in,"21,53",#9e9e9e,2597
+33,duel warden,"127,09",#191919,2597
+23,riverlands north,"169,96",#545454,2593
+68,Stark Karstark,"167,37",#333333,2589
+88,Stannis warden south,"167,15",#515151,2587
+28,chewbacca mustafar,"127,44",#efefef,2584
+4,warden south duel,"71,89",#111111,2584
+73,Dorne bastard,"114,09",#848484,2584
+31,Lannister,"85,02",#3f3f3f,2580
+34,of north,"128,48",#919191,2580
+38,ewok sith,"55,43",#666666,2578
+36,Lannister,"96,22",#a5a5a5,2575
+61,Winterfell Lannister,"28,01",#848484,2575
+54,dooku solo,"13,14",#e5e5e5,2575
+24,south duel tourney,"48,99",#aaaaaa,2574
+11,Karstark Dorne,"49,7",#141414,2573
+2,Tarly Stark,"9,24",#919191,2573
+72,north,"161,6",#474747,2573
+47,Tully,"82,15",#919191,2571
+10,Karstark Dorne,"119,52",#f4f4f4,2571
+39,warden,"196,65",#a0a0a0,2571
+74,duel warden,"158,29",#707070,2569
+64,Direwolf,"195,62",#b7b7b7,2568
+65,riverlands the,"121,91",#6b6b6b,2567
+58,solo palpatine chewbacca,"130,59",#2b2b2b,2567
+53,kingsblood Littlefinger the,"137,81",#3a3a3a,2564
+7,north of Casterly,"63,33",#b7b7b7,2563
+98,Direwolf Littlefinger,"38,33",#bababa,2562
+32,north,"178,28",#0f0f0f,2561
+82,kingsblood Littlefinger the,"12,45",#545454,2560
+13,palpatine chewbacca,"139,59",#2b2b2b,2560
+12,duel Direwolf,"181,6",#a8a8a8,2558
+18,Karstark warden,"148,91",#c4c4c4,2552
+67,Winterfell,"195,94",#1c1c1c,2552
+44,Karstark Dorne,"105,48",#878787,2550
+62,the duel,"188,94",#666666,2549
+5,skywalker ewok,"171,22",#dbdbdb,2548
+84,Karstark Tully Dorne,"92,91",#353535,2545
+79,Direwolf riverlands the,"132,86",#b2b2b2,2545
+78,Karstark warden,"178,85",#919191,2543
+57,Direwolf Stannis riverlands,"170,76",#848484,2539
+85,bastard of north,"62,62",#474747,2539
+89,skywalker ewok,"172,78",#636363,2538
+56,Direwolf riverlands,"167,07",#5b5b5b,2537
+97,jinn Winterfell,"65,25",#bababa,2536
+26,Stark Karstark,"53,01",#898989,2536
+93,Littlefinger Tarly Stark,"192,6",#efefef,2535
+15,Stannis warden,"194,29",#dbdbdb,2535
+49,the giantsblood maester,"53,31",#e2e2e2,2531
+86,Stark kingsblood,"189,21",#141414,2528
+3,duel tourney Lannister,"171,13",#d8d8d8,2528
+91,the duel,"59,76",#adadad,2527
+17,skywalker ewok sith,"91,89",#7c7c7c,2527
+63,Jade tatooine dooku,"188,58",#dbdbdb,2526
+95,riverlands north Direwolf,"6,9",#c1c1c1,2525
+35,the giantsblood maester,"107,17",#8c8c8c,2522
+25,skywalker ewok,"157,53",#2b2b2b,2521
+41,Lannister Barratheon Direwolf,"141,01",#fcfcfc,2517
+100,south duel,"40,43",#6d6d6d,2517
+9,Winterfell,"76,4",#b5b5b5,2516
+50,in,"124,04",#7a7a7a,2515
+99,the duel,"151,78",#212121,2514
+46,giantsblood maester Karstark,"58,78",#2b2b2b,2513
+60,rock Renly,"68,38",#898989,2512
+76,Littlefinger Tarly,"65,07",#686868,2507
+96,dooku solo,"20,92",#282828,2506
+27,Stannis riverlands,"172,93",#7a7a7a,2503
+8,Winterfell,"32,37",#383838,2503
+90,Winterfell,"39,73",#757575,2500
+55,Tully maester,"3,83",#6d6d6d,2497
+20,warden Karstark,"91,96",#b5b5b5,2497
+80,Tarly Stark,"14,1",#020202,2496
+14,Direwolf,"147,53",#c4c4c4,2496
+6,dooku solo,"136,6",#c4c4c4,2492
+92,Stannis warden,"168,49",#afafaf,2488
+40,tatooine dooku solo,"73,31",#070707,2488
+83,duel tourney,"26,51",#cccccc,2484
+59,Direwolf Stannis,"114,77",#bcbcbc,2481
+70,Direwolf Stannis,"6,93",#c9c9c9,2480
+94,in south Winterfell,"51,94",#3a3a3a,2479
+45,south,"92,65",#bfbfbf,2478
+81,the duel,"15,87",#7f7f7f,2469
+30,Karstark warden,"79,53",#606060,2468
+1,Direwolf Stannis,"161,11",#7c7c7c,2468
+51,north Tully,"30,14",#262626,2466
+77,Tarly Littlefinger,"150,5",#f4f4f4,2462
+71,Tully Dorne,"103,73",#424242,2462
+37,Direwolf Littlefinger,"26,66",#aaaaaa,2461
+75,giantsblood maester Karstark,"9,46",#f9f9f9,2461
+69,Littlefinger the giantsblood,"57,25",#b7b7b7,2457
+19,dooku solo,"60,33",#3f3f3f,2449
+22,chewbacca mustafar,"150,02",#fcfcfc,2448
+42,sith,"83,51",#494949,2425
+43,duel,"59,8",#5b5b5b,2414
