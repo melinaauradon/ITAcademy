@@ -5,17 +5,17 @@
 CREATE SCHEMA `sprint3-analytics-melina.sprint3_silver`
 OPTIONS (
 location = 'EU'
-)
-;
+);
 
 -- Exercici 2: Ingesta en Capa Bronze
+
 -- tabla transactions_raw
-CREATE EXTERNAL TABLE `sprint3-analytics-melina.sprint3_bronze.transactions_raw`
+CREATE OR REPLACE EXTERNAL TABLE `sprint3-analytics-melina.sprint3_bronze.transactions_raw`
 OPTIONS (
   format = 'CSV',
   uris = ['gs://bootcamp-data-analytics-public/ERP/transactions.csv'],
-  field_delimiter = ';')
-  ;
+  field_delimiter = ';' -- Delimitador: ; (Punt i coma)
+  );
 
 -- tabla companies_raw
 CREATE OR REPLACE EXTERNAL TABLE `sprint3-analytics-melina.sprint3_bronze.companies_raw`
@@ -31,32 +31,32 @@ OPTIONS (
   format = 'CSV',
   uris = ['gs://bootcamp-data-analytics-public/ERP/companies.csv'],
   field_delimiter = ',',
-  skip_leading_rows = 1)
-  ;
+  skip_leading_rows = 1 -- Capçalera: Ignora la 1a fila
+  );
 
 -- tabla american_users_raw
 CREATE EXTERNAL TABLE `sprint3-analytics-melina.sprint3_bronze.american_users_raw`
 OPTIONS (
   format = 'CSV',
   uris = ['gs://bootcamp-data-analytics-public/CRM/american_users.csv'],
-  field_delimiter = ',')
-  ;
+  field_delimiter = ','
+  );
   
  -- tabla european_users_raw
 CREATE EXTERNAL TABLE `sprint3-analytics-melina.sprint3_bronze.european_users_raw`
 OPTIONS (
   format = 'CSV',
   uris = ['gs://bootcamp-data-analytics-public/CRM/european_users.csv'],
-  field_delimiter = ',')
-  ;
+  field_delimiter = ','
+  );
   
 -- tabla credit_cards_raw
 CREATE EXTERNAL TABLE `sprint3-analytics-melina.sprint3_bronze.credit_cards_raw`
 OPTIONS (
   format = 'CSV',
   uris = ['gs://bootcamp-data-analytics-public/CRM/credit_cards.csv'],
-  field_delimiter = ',')
-  ;  
+  field_delimiter = ','
+  );  
 
 -- tabla transactions_raw_native
 CREATE OR REPLACE TABLE `sprint3-analytics-melina.sprint3_bronze.transactions_raw_native` AS
@@ -115,7 +115,8 @@ declined,
 ARRAY(
       SELECT SAFE_CAST(TRIM(id) AS INT64)
       FROM UNNEST(SPLIT(product_ids, ",")) AS id
-    ) AS product_ids, 
+    ) AS product_ids,
+user_id,
 SAFE_CAST(lat AS FLOAT64) AS lat,
 SAFE_CAST(longitude AS FLOAT64) AS longitude,
 
