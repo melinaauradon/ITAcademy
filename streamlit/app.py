@@ -75,6 +75,9 @@ if categoria != "Todos":
 
 st.subheader("Indicadores principales")
 
+# 1. Calculamos la facturación total primero
+facturacion = df_filtrado['amount'].sum() 
+
 # --- RENDERIZADO EN COLUMNAS ---
 col1, col2, col3 = st.columns(3)
 
@@ -85,9 +88,12 @@ with col1:
     )
 
 with col2:
+    # Guardamos el ticket medio en una variable
+    ticket_medio = df_filtrado['amount'].sum() / df_filtrado['id_tx'].nunique() if df_filtrado['id_tx'].nunique() > 0 else 0
+    
     st.metric(
         "Ticket Medio",
-        f"{(df_filtrado['amount'].sum() / df_filtrado['id_tx'].nunique()):,.2f} €"
+        f"{ticket_medio:,.2f} €"
     )
 
 with col3:
