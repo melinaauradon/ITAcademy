@@ -75,18 +75,19 @@ if categoria != "Todos":
 
 st.subheader("Indicadores principales")
 
+# --- RENDERIZADO EN COLUMNAS ---
 col1, col2, col3 = st.columns(3)
 
 with col1:
     st.metric(
         "Facturación Total",
-        f"{df_filtrado['amount'].sum():,.0f} €"
+        f"{facturacion:,.0f} €"
     )
 
 with col2:
     st.metric(
         "Ticket Medio",
-        f"{ticket_medio:,.2f} €"
+        f"{(df_filtrado['amount'].sum() / df_filtrado['id_tx'].nunique()):,.2f} €"
     )
 
 with col3:
