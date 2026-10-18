@@ -35,9 +35,12 @@ st.markdown(
 st.sidebar.header("Filtros")
 
 # 1. Filtro de Tiempo (Rango de fechas)
-# Obtenemos las fechas límites reales de tus datos
-fecha_minima = df_full["timestamp"].dt.date.min()
-fecha_maxima = df_full["timestamp"].dt.date.max()
+
+timestamp_datetime = pd.to_datetime(df_full["timestamp"], errors="coerce")
+
+fecha_minima = timestamp_datetime.min().date()
+fecha_maxima = timestamp_datetime.max().date()
+
 
 rango_fechas = st.sidebar.date_input(
     "Rango de Fechas",
