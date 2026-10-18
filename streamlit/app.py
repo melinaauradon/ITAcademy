@@ -85,8 +85,8 @@ with col1:
 
 with col2:
     st.metric(
-        "Transacciones",
-        df_filtrado["id_tx"].nunique()
+        "Ticket Medio",
+        f"{ticket_medio:,.2f} €"
     )
 
 with col3:
