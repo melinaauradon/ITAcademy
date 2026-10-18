@@ -76,6 +76,7 @@ categoria = st.sidebar.selectbox(
 df_filtrado = df_full.copy()
 
 # A) Aplicar filtro de fechas (solo si el usuario seleccionó inicio y fin)
+df_filtrado["timestamp"] = pd.to_datetime(df_filtrado["timestamp"], errors="coerce")
 if len(rango_fechas) == 2:
     fecha_inicio, fecha_fin = rango_fechas
     df_filtrado = df_filtrado[
