@@ -25,7 +25,7 @@ st.title("📊 Dashboard Comercial")
 
 st.markdown(
     """
-    Análisis de canales de venta, campañas y categorías de producto.
+    Análisis de ventas por canal, campaña y categoría de producto.
     """
 )
 
@@ -70,7 +70,7 @@ if categoria != "Todos":
     ]
 
 # =================================
-# KPIs
+# KPIS
 # =================================
 
 st.subheader("Indicadores principales")
@@ -105,71 +105,14 @@ ventas_canal = (
     .groupby("channel")["amount"]
     .sum()
     .reset_index()
+    .sort_values("amount", ascending=False)
 )
 
 fig1 = px.bar(
     ventas_canal,
     x="channel",
     y="amount",
-    title="Facturación por canal"
-)
-
-st.plotly_chart(fig1, use_container_width=True)
-
-# =================================
-# VISUALIZACIÓN 2
-# FACTURACIÓN POR CAMPAÑA
-# =================================
-
-ventas_campania = (
-    df_filtrado
-    .groupby("campaign_id")["amount"]
-    .sum()
-    .reset_index()
-    .sort_values("amount", ascending=False)
-)
-
-fig2 = px.bar(
-    ventas_campania,
-    x="campaign_id",
-    y="amount",
-    title="Facturación por campaña"
-)
-
-st.plotly_chart(fig2, use_container_width=True)
-
-# =================================
-# VISUALIZACIÓN 3
-# FACTURACIÓN POR CATEGORÍA
-# =================================
-
-ventas_categoria = (
-    df_filtrado
-    .groupby("merchant_category")["amount"]
-    .sum()
-    .reset_index()
-    .sort_values("amount", ascending=False)
-)
-
-fig3 = px.bar(
-    ventas_categoria,
-    x="merchant_category",
-    y="amount",
-    title="Facturación por categoría"
-)
-
-st.plotly_chart(fig3, use_container_width=True)
-
-# =================================
-# VISUALIZACIÓN 4
-# POSICIONAMIENTO DE PRECIO
-# =================================
-
-fig4 = px.box(
-    df_filtrado,
-    x="merchant_price_position",
-    y="amount",
-    title="Distribución de ventas por posicionamiento de precio"
-)
-
-st.plotly_chart(fig4, use_container_width=True)
+    title="Facturación por canal",
+    labels={
+        "channel": "Canal",
+    
