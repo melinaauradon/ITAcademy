@@ -1,40 +1,65 @@
-
 import pandas as pd
 import streamlit as st
 import plotly.express as px
 
-# =====================
+# ==========================
+# CONFIGURACIÓN DE LA PÁGINA
+# ==========================
+
+st.set_page_config(
+    page_title="Dashboard Comercial",
+    layout="wide"
+)
+
+# ==========================
 # CARGA DE DATOS
-# =====================
+# ==========================
 
 df_full = pd.read_csv("streamlit/df_full.csv")
 
-# =====================
+# ==========================
 # TÍTULO
-# =====================
+# ==========================
 
-st.title("Dashboard Comercial")
+st.title("📊 Dashboard Comercial")
 
-# =====================
+st.markdown(
+    """
+    Análisis comercial de ventas, clientes y comportamiento de compra.
+    """
+)
+
+# ==========================
 # FILTROS
-# =====================
+# ==========================
+
+st.sidebar.header("Filtros")
 
 pais = st.sidebar.selectbox(
     "País usuario",
-    sorted(df_full["country_user"].unique())
+    sorted(df_full["country_user"].dropna().unique())
 )
 
-# =====================
-# DATAFRAME FILTRADO
-# =====================
+segmento = st.sidebar.selectbox(
+    "Segmento de usuario",
+    sorted(df_full["user_segment"].dropna().unique())
+)
+
+# ==========================
+# FILTRADO
+# ==========================
 
 df_filtrado = df_full[
-    df_full["country_user"] == pais
+    (df_full["country_user"] == pais)
+    &
+    (df_full["user_segment"] == segmento)
 ]
 
-# =====================
+# ==========================
 # KPIs
-# =====================
+# ==========================
+
+st.subheader("Indicadores principales")
 
 col1, col2, col3 = st.columns(3)
 
@@ -46,7 +71,7 @@ with col1:
 
 with col2:
     st.metric(
-        "Transacciones",
+        "Nº Transacciones",
         df_filtrado["id_tx"].nunique()
     )
 
@@ -56,45 +81,4 @@ with col3:
         f"{df_filtrado['amount'].mean():.2f} €"
     )
 
-# =====================
-# GRÁFICO 1
-# Facturación por segmento
-# =====================
-
-ventas_segmento = (
-    df_filtrado
-    .groupby("user_segment")["amount"]
-    .sum()
-    .reset_index()
-)
-
-fig1 = px.bar(
-    ventas_segmento,
-    x="user_segment",
-    y="amount",
-    title="Facturación por segmento"
-)
-
-st.plotly_chart(fig1, use_container_width=True)
-
-# =====================
-# GRÁFICO 2
-# Distribución ingresos
-# =====================
-
-fig2 = px.box(
-    df_filtrado,
-    x="user_segment",
-    y="amount",
-    title="Distribución de importes por segmento"
-)
-
-st.plotly_chart(fig2, use_container_width=True)
-
-# =====================
-# TABLA
-# =====================
-
-st.subheader("Muestra de datos")
-
-st.dataframe(df_filtrado.head(20))
+# ================
