@@ -28,79 +28,65 @@ st.markdown(
     Análisis de ventas por canal, campaña y categoría de producto.
     """
 )
-
 # =================================
 # FILTROS
 # =================================
 
 st.sidebar.header("Filtros")
 
+# 1. Filtro de Tiempo (Rango de fechas)
+# Obtenemos las fechas límites reales de tus datos
+fecha_minima = df_full["timestamp"].min().date()
+fecha_maxima = df_full["timestamp"].max().date()
+
+rango_fechas = st.sidebar.date_input(
+    "Rango de Fechas",
+    value=(fecha_minima, fecha_maxima), # Por defecto muestra todo el rango
+    min_value=fecha_minima,
+    max_value=fecha_maxima,
+)
+
+# Filtro de Canal
 canales = ["Todos"] + sorted(
     df_full["channel"].dropna().unique().tolist()
 )
-
-categorias = ["Todos"] + sorted(
-    df_full["merchant_category"].dropna().unique().tolist()
-)
-
 canal = st.sidebar.selectbox(
     "Canal",
     canales
 )
 
+# Filtro de Categoría
+categorias = ["Todos"] + sorted(
+    df_full["merchant_category"].dropna().unique().tolist()
+)
 categoria = st.sidebar.selectbox(
     "Categoría",
     categorias
 )
 
+
 # =================================
-# FILTRADO
+# APLICACIÓN DE LOS FILTROS
 # =================================
 
+# Creamos una copia para no modificar el dataframe original
 df_filtrado = df_full.copy()
 
+# A) Aplicar filtro de fechas (solo si el usuario seleccionó inicio y fin)
+if len(rango_fechas) == 2:
+    fecha_inicio, fecha_fin = rango_fechas
+    df_filtrado = df_filtrado[
+        (df_filtrado["timestamp"].dt.date >= fecha_inicio) & 
+        (df_filtrado["timestamp"].dt.date <= fecha_fin)
+    ]
+
+# B) Aplicar filtro de Canal
 if canal != "Todos":
-    df_filtrado = df_filtrado[
-        df_filtrado["channel"] == canal
-    ]
+    df_filtrado = df_filtrado[df_filtrado["channel"] == canal]
 
+# C) Aplicar filtro de Categoría
 if categoria != "Todos":
-    df_filtrado = df_filtrado[
-        df_filtrado["merchant_category"] == categoria
-    ]
-
-# =================================
-# KPIS
-# =================================
-
-st.subheader("Indicadores principales")
-
-# 1. Calculamos la facturación total primero
-facturacion = df_filtrado['amount'].sum() 
-
-# --- RENDERIZADO EN COLUMNAS ---
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.metric(
-        "Facturación Total",
-        f"{facturacion:,.0f} €"
-    )
-
-with col2:
-    # Guardamos el ticket medio en una variable
-    ticket_medio = df_filtrado['amount'].sum() / df_filtrado['id_tx'].nunique() if df_filtrado['id_tx'].nunique() > 0 else 0
-    
-    st.metric(
-        "Ticket Medio",
-        f"{ticket_medio:,.2f} €"
-    )
-
-with col3:
-    st.metric(
-        "Descuento Medio",
-        f"{df_filtrado['discount_amount'].mean():.2f} €"
-    )
+    df_filtrado = df_filtrado[df_filtrado["merchant_category"] == categoria]
 
 # =================================
 # VISUALIZACIÓN 1
