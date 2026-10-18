@@ -73,4 +73,4 @@ if segmento != "Todos":
 
 st.subheader("Indicadores principales")
 
-col1, col2, col3 = st.columns(3
+col1, col2, col3 = st.columns(3)
