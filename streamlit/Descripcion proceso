@@ -9,7 +9,7 @@ Categoría de producto (merchant_category)
 
 Facturación total : Permite medir el volumen global de negocio generado por la selección actual de filtros.
 Número de transacciones : Complementa la facturación mostrando el volumen de actividad comercial.
-Descuento medio aplicado :Permite evaluar la intensidad promocional aplicada a las ventas y facilita interpretar posteriormente el rendimiento de campañas y categorías.
+Descuento medio aplicado :Permite evaluar con más detalle el comportamiento de los usuarios durante las campañas.
 
 *Visualizaciones con Plotly*
 
