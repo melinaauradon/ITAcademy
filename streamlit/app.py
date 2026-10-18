@@ -1,7 +1,7 @@
 import pandas as pd
 import streamlit as st
 
-df_full = pd.read_csv("df_full.csv")
+df_full = pd.read_csv("streamlit/df_full.csv")
 
 st.title("Dashboard Comercial")
 
