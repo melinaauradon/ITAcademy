@@ -16,4 +16,9 @@ df_filtrado = df_full[
     df_full["country_user"] == pais
 ]
 
+st.metric(
+    "Facturación Total",
+    f"{df_filtrado['amount'].sum():,.0f} €"
+)
+
 st.write(df_filtrado.head())
