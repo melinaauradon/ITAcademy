@@ -24,7 +24,9 @@ df_full = pd.read_csv("streamlit/df_full.csv")
 st.title("📊 Dashboard Comercial")
 
 st.markdown(
-    "Análisis comercial de ventas, clientes y comportamiento de compra."
+    """
+    Análisis de canales de venta, campañas y categorías de producto.
+    """
 )
 
 # =================================
@@ -33,22 +35,22 @@ st.markdown(
 
 st.sidebar.header("Filtros")
 
-paises = ["Todos"] + sorted(
-    df_full["country_user"].dropna().unique().tolist()
+canales = ["Todos"] + sorted(
+    df_full["channel"].dropna().unique().tolist()
 )
 
-segmentos = ["Todos"] + sorted(
-    df_full["user_segment"].dropna().unique().tolist()
+categorias = ["Todos"] + sorted(
+    df_full["merchant_category"].dropna().unique().tolist()
 )
 
-pais = st.sidebar.selectbox(
-    "País usuario",
-    paises
+canal = st.sidebar.selectbox(
+    "Canal",
+    canales
 )
 
-segmento = st.sidebar.selectbox(
-    "Segmento usuario",
-    segmentos
+categoria = st.sidebar.selectbox(
+    "Categoría",
+    categorias
 )
 
 # =================================
@@ -57,14 +59,14 @@ segmento = st.sidebar.selectbox(
 
 df_filtrado = df_full.copy()
 
-if pais != "Todos":
+if canal != "Todos":
     df_filtrado = df_filtrado[
-        df_filtrado["country_user"] == pais
+        df_filtrado["channel"] == canal
     ]
 
-if segmento != "Todos":
+if categoria != "Todos":
     df_filtrado = df_filtrado[
-        df_filtrado["user_segment"] == segmento
+        df_filtrado["merchant_category"] == categoria
     ]
 
 # =================================
@@ -83,98 +85,91 @@ with col1:
 
 with col2:
     st.metric(
-        "Nº Transacciones",
+        "Transacciones",
         df_filtrado["id_tx"].nunique()
     )
 
 with col3:
     st.metric(
-        "Ticket Medio",
-        f"{df_filtrado['amount'].mean():.2f} €"
+        "Descuento Medio",
+        f"{df_filtrado['discount_amount'].mean():.2f} €"
     )
 
 # =================================
 # VISUALIZACIÓN 1
-# FACTURACIÓN POR PAÍS
+# FACTURACIÓN POR CANAL
 # =================================
 
-ventas_pais = (
+ventas_canal = (
     df_filtrado
-    .groupby("country_user")["amount"]
+    .groupby("channel")["amount"]
     .sum()
     .reset_index()
-    .sort_values("amount", ascending=False)
 )
 
 fig1 = px.bar(
-    ventas_pais,
-    x="country_user",
+    ventas_canal,
+    x="channel",
     y="amount",
-    title="Facturación por país"
+    title="Facturación por canal"
 )
 
 st.plotly_chart(fig1, use_container_width=True)
 
 # =================================
 # VISUALIZACIÓN 2
-# FACTURACIÓN POR SEGMENTO
+# FACTURACIÓN POR CAMPAÑA
 # =================================
 
-ventas_segmento = (
+ventas_campania = (
     df_filtrado
-    .groupby("user_segment")["amount"]
+    .groupby("campaign_id")["amount"]
     .sum()
     .reset_index()
+    .sort_values("amount", ascending=False)
 )
 
 fig2 = px.bar(
-    ventas_segmento,
-    x="user_segment",
+    ventas_campania,
+    x="campaign_id",
     y="amount",
-    title="Facturación por segmento"
+    title="Facturación por campaña"
 )
 
 st.plotly_chart(fig2, use_container_width=True)
 
 # =================================
 # VISUALIZACIÓN 3
-# LOCAL VS INTERNACIONAL
+# FACTURACIÓN POR CATEGORÍA
 # =================================
 
-compras = (
-    df_filtrado["compra_local"]
-    .value_counts()
+ventas_categoria = (
+    df_filtrado
+    .groupby("merchant_category")["amount"]
+    .sum()
     .reset_index()
+    .sort_values("amount", ascending=False)
 )
 
-compras.columns = ["compra_local", "cantidad"]
-
-compras["compra_local"] = compras["compra_local"].map(
-    {
-        True: "Local",
-        False: "Internacional"
-    }
-)
-
-fig3 = px.pie(
-    compras,
-    names="compra_local",
-    values="cantidad",
-    title="Compras locales vs internacionales"
+fig3 = px.bar(
+    ventas_categoria,
+    x="merchant_category",
+    y="amount",
+    title="Facturación por categoría"
 )
 
 st.plotly_chart(fig3, use_container_width=True)
 
 # =================================
 # VISUALIZACIÓN 4
-# DISTRIBUCIÓN DE IMPORTES
+# POSICIONAMIENTO DE PRECIO
 # =================================
 
-fig4 = px.histogram(
+fig4 = px.box(
     df_filtrado,
-    x="amount",
-    nbins=30,
-    title="Distribución de importes"
+    x="merchant_price_position",
+    y="amount",
+    title="Distribución de ventas por posicionamiento de precio"
 )
 
 st.plotly_chart(fig4, use_container_width=True)
