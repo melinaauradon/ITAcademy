@@ -21,7 +21,7 @@ Ticket medio por campaña
 Visualización 1: Facturación por canal
 ¿Qué canal genera más ingresos? (online, store, marketplace)
 
-Permite identificar los canales que impulsan el negocio y sirve como punto de partida para la asignación de recursos comerciales.
+Permite identificar los canales que impulsan el negocio y sirve como punto de partida para asignación de recursos comerciales.
 
 
 Visualización 2: Facturación por campaña
@@ -30,23 +30,14 @@ Visualización 2: Facturación por campaña
 Permite evaluar el impacto económico de las acciones de marketing y detectar campañas especialmente rentables.
 nota : excluimos el valor NO_CAMPAIGN para evitar que transacciones sin campaña distorsionaran la comparación.
 
+
 Visualización 3: Facturación por categoría
 ¿Qué categorías de producto aportan más ingresos?
 
-La facturación se agrupa por merchant_category, permitiendo identificar las líneas de negocio más relevantes.
-Esta visualización resulta especialmente útil para priorizar estrategias comerciales, promociones o inversiones en determinadas categorías.
+La facturación se agrupa por merchant_category, permitiendo identificar e enfocar estrategias comerciales en las líneas de negocio más relevantes.
+
 
 Visualización 4: Ticket medio por campaña
-¿Qué campañas atraen compras de mayor valor?
+¿Qué campañas consiguen compras de mayor valor?
 
-Mientras que la visualización de facturación muestra el volumen económico total, el ticket medio permite analizar la calidad de las ventas generadas por cada campaña.
-De este modo se distinguen campañas con muchas ventas de bajo importe de aquellas que generan compras más valiosas.
-
-Conclusiones
-
-El dashboard permite analizar el negocio desde cuatro perspectivas complementarias:
-
-Canales de venta → dónde se vende.
-Campañas → qué acciones generan ingresos.
-Categorías → qué productos impulsan el negocio.
-Ticket medio → qué campañas generan compras de mayor valor.
+Mientras que la visualización de facturación muestra el volumen económico total, el ticket medio permite distinguir en que campañas los usuarios realizan compras más caras.
