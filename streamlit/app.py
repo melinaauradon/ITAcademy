@@ -21,7 +21,7 @@ df_full = pd.read_csv("streamlit/df_full.csv")
 # TÍTULO
 # =================================
 
-st.title("📊 Dashboard Comercial")
+st.title(" Dashboard Comercial")
 
 st.markdown(
     """
