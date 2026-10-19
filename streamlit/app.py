@@ -221,24 +221,33 @@ st.plotly_chart(fig3, use_container_width=True)
 # TICKET MEDIO POR CAMPAÑA
 # =================================
 
-ticket_campania = (
+df_min_max = df_full.groupby('merchant_category')['amount'].agg(['min', 'max'])
+
+st.bar_chart(df_min_max)
+
+# =================================
+# VISUALIZACIÓN 5
+# TICKET MEDIO POR CAMPAÑA
+# =================================
+
+ticket_campana = (
     df_filtrado
     .groupby("campaign_id")["amount"]
     .mean()
     .reset_index()
 )
 
-ticket_campania = ticket_campania[
-    ticket_campania["campaign_id"] != "NO_CAMPAIGN"
+ticket_campana = ticket_campana[
+    ticket_campana["campaign_id"] != "NO_CAMPAIGN"
 ]
 
-ticket_campania = ticket_campania.sort_values(
+ticket_campana = ticket_campana.sort_values(
     "amount",
     ascending=False
 )
 
 fig4 = px.bar(
-    ticket_campania,
+    ticket_campana,
     x="campaign_id",
     y="amount",
     title="Ticket medio por campaña",
