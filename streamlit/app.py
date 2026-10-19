@@ -82,6 +82,7 @@ if len(rango_fechas) == 2:
         (df_filtrado["timestamp"].dt.date >= fecha_inicio) &
         (df_filtrado["timestamp"].dt.date <= fecha_fin)
     ]
+df_global_periodo = df_filtrado.copy()
 
 # B) Aplicar filtro de Campaña
 if campana != "Todos":
