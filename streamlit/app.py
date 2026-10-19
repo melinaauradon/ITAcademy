@@ -207,7 +207,7 @@ else:
     st.plotly_chart(fig4, use_container_width=True)
 
     # =================================
-    VISUALIZACIÓN 5: FACTURACIÓN POR CAMPAÑA (FILTRADO POR CATEGORÍA)
+    VISUALIZACIÓN 5 : CAMPAÑAS POR CATEGORÍA
     # =================================
 
     st.subheader("Análisis de Campañas por Categoría")
@@ -225,7 +225,7 @@ else:
         .sort_values("amount", ascending=False)
     )
 
-    fig_campanas = px.bar(
+    fig_5 = px.bar(
         facturacion_por_campana,
         x="campaign_id",
         y="amount",
@@ -234,8 +234,8 @@ else:
         text_auto=",.0f" # Muestra el valor encima de las barras formateado
     )
  
-    fig_campanas.update_traces(textposition="outside", marker_color="#1f77b4")
-    fig_campanas.update_layout(xaxis_tickangle=-45)
+    fig_5.update_traces(textposition="outside", marker_color="#1f77b4")
+    fig_5.update_layout(xaxis_tickangle=-45)
     
     
     st.plotly_chart(fig_campanas, use_container_width=True)
