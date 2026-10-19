@@ -233,6 +233,5 @@ else:
     fig_4.update_traces(textposition="outside", marker_color="#1f77b4")
     fig_4.update_layout(xaxis_tickangle=-45)
     
-    
-    st.plotly_chart(fig_campanas, use_container_width=True)
+    st.plotly_chart(fig_4, use_container_width=True)
 
