@@ -49,13 +49,13 @@ rango_fechas = st.sidebar.date_input(
     max_value=fecha_maxima,
 )
 
-# Filtro de Canal
-canales = ["Todos"] + sorted(
-    df_full["channel"].dropna().unique().tolist()
+# Filtro de Campaña
+campanas = ["Todos"] + sorted(
+    df_full["campaign_id"].dropna().unique().tolist()
 )
-canal = st.sidebar.selectbox(
-    "Canal",
-    canales
+campana = st.sidebar.selectbox(
+    "Campaña",
+    campanas
 )
 
 # Filtro de Categoría
@@ -66,7 +66,6 @@ categoria = st.sidebar.selectbox(
     "Categoría",
     categorias
 )
-
 
 # =================================
 # APLICACIÓN DE LOS FILTROS
@@ -80,13 +79,13 @@ df_filtrado["timestamp"] = pd.to_datetime(df_filtrado["timestamp"], errors="coer
 if len(rango_fechas) == 2:
     fecha_inicio, fecha_fin = rango_fechas
     df_filtrado = df_filtrado[
-        (df_filtrado["timestamp"].dt.date >= fecha_inicio) & 
+        (df_filtrado["timestamp"].dt.date >= fecha_inicio) &
         (df_filtrado["timestamp"].dt.date <= fecha_fin)
     ]
 
-# B) Aplicar filtro de Canal
-if canal != "Todos":
-    df_filtrado = df_filtrado[df_filtrado["channel"] == canal]
+# B) Aplicar filtro de Campaña
+if campana != "Todos":
+    df_filtrado = df_filtrado[df_filtrado["campaign_id"] == campana]
 
 # C) Aplicar filtro de Categoría
 if categoria != "Todos":
