@@ -201,3 +201,38 @@ else:
     )
     fig4.update_layout(hovermode="x unified")
     st.plotly_chart(fig4, use_container_width=True)
+
+    # =================================
+    # NUEVA VISUALIZACIÓN: FACTURACIÓN POR CAMPAÑA (FILTRADO POR CATEGORÍA)
+    # =================================
+
+    st.subheader("Análisis de Campañas por Categoría")
+    st.markdown("_Esta gráfica muestra cómo se distribuye la facturación entre las distintas campañas para la categoría y fechas seleccionadas._")
+
+    # Creamos un dataframe que aplique fechas y categoría, pero IGNORE el filtro de campaña lateral
+    df_campanas = df_global_periodo.copy()
+    if categoria != "Todos":
+        df_campanas = df_campanas[df_campanas["merchant_category"] == categoria]
+
+    facturacion_por_campana = (
+        df_campanas.groupby("campaign_id")["amount"]
+        .sum()
+        .reset_index()
+        .sort_values("amount", ascending=False)
+    )
+
+    fig_campanas = px.bar(
+        facturacion_por_campana,
+        x="campaign_id",
+        y="amount",
+        title=f"Facturación por Campaña - Categoría: {categoria}",
+        labels={"campaign_id": "Campaña", "amount": "Facturación Total (€)"},
+        text_auto=",.0f" # Muestra el valor encima de las barras formateado
+    )
+ 
+    fig_campanas.update_traces(textposition="outside", marker_color="#1f77b4")
+    fig_campanas.update_layout(xaxis_tickangle=-45)
+    
+    
+    st.plotly_chart(fig_campanas, use_container_width=True)
+
