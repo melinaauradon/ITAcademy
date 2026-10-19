@@ -177,7 +177,7 @@ else:
         barmode="group",
         labels={"value": "Facturación (€)", "merchant_category": "Categoría", "variable": "Ámbito"}
     )
-    st.plotly_chart(fig3, use_container_width=True)
+    st.plotly_chart(fig2, use_container_width=True)
 
     st.markdown("---")
 
