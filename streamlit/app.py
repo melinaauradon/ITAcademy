@@ -142,7 +142,7 @@ fig1 = px.bar(
     x="campaign_id",
     y="amount",
     color="channel",  # segmenta la barra por colores de canal
-    title="Análisis Omnicanal: Distribución de Campañas por Canal de Venta",
+    title="Distribución de Campañas por Canal de Venta",
     labels={
         "campaign_id": "Campaña",
         "amount": "Facturación (€)",
