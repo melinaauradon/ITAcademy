@@ -261,7 +261,7 @@ ticket_campana = ticket_campana.sort_values(
     ascending=False
 )
 
-fig4 = px.bar(
+fig5 = px.bar(
     ticket_campana,
     x="campaign_id",
     y="amount",
@@ -272,4 +272,4 @@ fig4 = px.bar(
     }
 )
 
-st.plotly_chart(fig4, use_container_width=True)
+st.plotly_chart(fig5, use_container_width=True)
