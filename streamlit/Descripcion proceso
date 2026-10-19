@@ -2,8 +2,9 @@ La aplicación se estructuró en una única página e incorpora:
 
 *Filtros interactivos en la barra lateral* (st.sidebar)
 
-Canal de venta (channel)
-Categoría de producto (merchant_category)
+Calendario
+Campañas
+Categorías de producto
 
 *KPIs*
 
