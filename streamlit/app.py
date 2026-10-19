@@ -207,7 +207,7 @@ else:
     st.plotly_chart(fig4, use_container_width=True)
 
     # =================================
-    VISUALIZACIÓN 5 : CAMPAÑAS POR CATEGORÍA
+    # VISUALIZACIÓN 5 : CAMPAÑAS POR CATEGORÍA
     # =================================
 
     st.subheader("Análisis de Campañas por Categoría")
