@@ -174,7 +174,7 @@ else:
     fig2 = px.bar(
         comparativa_cat, 
         x="merchant_category", 
-        y=["Total Mercado (Periodo)", "Filtro Seleccionado"],
+        y=["Total", "Filtro Seleccionado"],
         barmode="group",
         labels={"value": "Facturación (€)", "merchant_category": "Categoría", "variable": "Ámbito"}
     )
