@@ -128,31 +128,31 @@ with col3:
 # FACTURACIÓN POR CANAL
 # =================================
 
-ventas_canal = (
-    df_filtrado
-    .groupby("channel")["amount"]
+# Agrupamos por campaña y canal simultáneamente
+ventas_canal_campania = (
+    df_filtrado[df_filtrado["campaign_id"] != "NO_CAMPAIGN"]
+    .groupby(["campaign_id", "channel"])["amount"]
     .sum()
     .reset_index()
     .sort_values("amount", ascending=False)
 )
 
 fig1 = px.bar(
-    ventas_canal,
-    x="channel",
+    ventas_canal_campania,
+    x="campaign_id",
     y="amount",
-    title="Facturación por canal",
+    color="channel",  # segmenta la barra por colores de canal
+    title="Análisis Omnicanal: Distribución de Campañas por Canal de Venta",
     labels={
-        "channel": "Canal",
-        "amount": "Facturación (€)"
-    }
-)
-
-fig1.update_traces(
-    texttemplate="%{y:,.0f}",
-    textposition="outside"
+        "campaign_id": "Campaña",
+        "amount": "Facturación (€)",
+        "channel": "Canal de Venta"
+    },
+    barmode="relative" # Permite ver el total de la campaña y su composición interna
 )
 
 st.plotly_chart(fig1, use_container_width=True)
+
 
 # =================================
 # VISUALIZACIÓN 2
