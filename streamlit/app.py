@@ -237,8 +237,8 @@ fig4 = px.bar(
     title='Importes por Categoría'
 )
 
+st.plotly_chart(fig4, use_container_width=True)
 
-st.plotly_chart(fig, use_container_width=True)
 
 # =================================
 # VISUALIZACIÓN 5
