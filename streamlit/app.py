@@ -32,10 +32,6 @@ st.markdown(
 # FILTROS
 # =================================
 
-# =================================
-# FILTROS
-# =================================
-
 st.sidebar.header("Filtros")
 
 # Cálculo de valores por defecto de las fechas
@@ -55,7 +51,7 @@ if "campana" not in st.session_state:
 if "categoria" not in st.session_state:
     st.session_state.categoria = "Todos"
 
-# Botón para borrar/reiniciar los filtros
+# Botón para borrar los filtros
 if st.sidebar.button("Borrar Filtros", use_container_width=True):
     st.session_state.rango_fechas = (fecha_minima, fecha_maxima)
     st.session_state.campana = "Todos"
@@ -108,17 +104,16 @@ if categoria != "Todos":
     df_filtrado = df_filtrado[df_filtrado["merchant_category"] == categoria]
 
 # =================================
-# INDICADORES PRINCIPALES (KPIs CORREGIDOS)
+# KPIs
 # =================================
-st.subheader("📈 Análisis de Eficiencia Comercial")
 
 facturacion = df_filtrado['amount'].sum()
 total_tx = df_filtrado['id_tx'].nunique()
 
-# 1. Ticket Medio Real (Evita el sesgo si una transacción tiene múltiples filas por producto)
+# 1. Ticket Medio  (promedio por id transaccion)
 ticket_medio = facturacion / total_tx if total_tx > 0 else 0
 
-# 2. Descuento Eficiente (Calculado solo sobre transacciones que SÍ tuvieron promoción)
+# 2. Descuento Medio (filtramos solo las transacciones que tuvieron descuento)
 df_con_descuento = df_filtrado[df_filtrado['discount_amount'] > 0]
 descuento_medio_real = df_con_descuento['discount_amount'].mean() if len(df_con_descuento) > 0 else 0
 
@@ -135,6 +130,13 @@ with col3:
     st.metric("Descuento Medio (Si aplica)", f"{descuento_medio_real:,.2f} €".replace(",", "."))
 with col4:
     st.metric("% Ventas con Descuento", f"{ratio_promocional:,.1f} %")
+
+st.write("### 🔍 Diagnóstico de Datos (Filtro Activo)")
+st.write(f"Total de filas en el filtro actual: {len(df_filtrado)}")
+st.write(f"Filas con descuento > 0: {len(df_filtrado[df_filtrado['discount_amount'] > 0])}")
+st.write(f"Filas con descuento == 0: {len(df_filtrado[df_filtrado['discount_amount'] == 0])}")
+st.write(f"Filas con descuento NULO (NaN): {df_filtrado['discount_amount'].isna().sum()}")
+
 
 st.markdown("---")
 
