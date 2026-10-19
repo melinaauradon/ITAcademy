@@ -93,6 +93,38 @@ if categoria != "Todos":
     df_filtrado = df_filtrado[df_filtrado["merchant_category"] == categoria]
 
 # =================================
+# KPIS
+# =================================
+
+st.subheader("Indicadores principales")
+
+# 1. Calculamos la facturación total primero
+facturacion = df_filtrado['amount'].sum()
+
+# --- RENDERIZADO EN COLUMNAS ---
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric(
+        "Facturación Total",
+        f"{facturacion:,.0f} €"
+    )
+
+with col2:
+    # Guardamos el ticket medio en una variable
+    ticket_medio = df_filtrado['amount'].sum() / df_filtrado['id_tx'].nunique() if df_filtrado['id_tx'].nunique() > 0 else 0
+
+    st.metric(
+        "Ticket Medio",
+        f"{ticket_medio:,.2f} €"
+    )
+
+with col3:
+    st.metric(
+        "Descuento Medio",
+        f"{df_filtrado['discount_amount'].mean():.2f} €"
+    )
+# =================================
 # VISUALIZACIÓN 1
 # FACTURACIÓN POR CANAL
 # =================================
