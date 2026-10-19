@@ -15,19 +15,19 @@ La aplicación se estructuró en una única página e incorpora:
 
 *Visualizaciones con Plotly*
 
-Visualización 1: Facturación por canal
+Visualización 1: Campañas por Canal de Venta
 ¿Qué canal genera más ingresos? (online, store, marketplace)
 
 Muestra un diagrama de barras apiladas para identificar qué canales impulsan mejor cada campaña (excluyendo NO_CAMPAIGN).
 
 
-Visualización 2: Impacto de las campañas sobre las ventas por categoría (Filtro Actual vs. Comportamiento Global)
+Visualización 2: Volumen de ventas por campaña
 ¿Qué peso tiene una campaña sobre las ventas de una categoria?
 
-Escogiendo una campaña, se muestran las categorías, comparando cuánto se vendió con dicha campaña frente al total de v.
+Escogiendo una campaña, se muestran las categorías, comparando cuánto se vendió con dicha campaña frente al total de ventas.
 
 
-Visualización 3: Facturación por categoría
+Visualización 3: Gasto por Categoría
 ¿Cuál es el rango de compra típico en cada línea de producto?
 
 Muestra de forma agrupada los percentiles. Permite entender el comportamiento del 50% central obviando los outliers.
