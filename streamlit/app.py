@@ -221,23 +221,22 @@ st.plotly_chart(fig3, use_container_width=True)
 # TICKET MEDIO POR CAMPAÑA
 # =================================
 
-df_plotly = df_full.groupby('merchant_category')['amount'].agg(['min', 'max']).reset_index()
+ticket_categoria = (
+    df_filtrado
+    .groupby('merchant_category')['amount']
+    .agg(['min', 'max'])
+    .reset_index()
+)
 
-fig = px.bar(
-    df_plotly,
+fig4 = px.bar(
+    ticket_categoria,
     x='merchant_category',
     y=['min', 'max'],
     barmode='group',
     labels={'merchant_category': 'Categoría', 'value': 'Importe ($)', 'variable': 'Métrica'},
-    title='Rango de Importes por Categoría'
+    title='Importes por Categoría'
 )
 
-fig.update_layout(
-    xaxis_title="Categoría de Comerciante",
-    yaxis_title="Importe ($)",
-    legend_title="Métrica",
-    hovermode="x unified"
-)
 
 st.plotly_chart(fig, use_container_width=True)
 
