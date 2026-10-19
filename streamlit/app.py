@@ -131,13 +131,6 @@ with col3:
 with col4:
     st.metric("% Ventas con Descuento", f"{ratio_promocional:,.1f} %")
 
-st.write("### 🔍 Diagnóstico de Datos (Filtro Activo)")
-st.write(f"Total de filas en el filtro actual: {len(df_filtrado)}")
-st.write(f"Filas con descuento > 0: {len(df_filtrado[df_filtrado['discount_amount'] > 0])}")
-st.write(f"Filas con descuento == 0: {len(df_filtrado[df_filtrado['discount_amount'] == 0])}")
-st.write(f"Filas con descuento NULO (NaN): {df_filtrado['discount_amount'].isna().sum()}")
-
-
 st.markdown("---")
 
 # Control de datos vacíos: si el cruce de filtros deja el dataset sin filas, frena errores visuales
