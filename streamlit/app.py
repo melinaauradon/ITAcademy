@@ -159,13 +159,14 @@ else:
     # =================================
     # VISUALIZACIÓN 2: FILTRO VS GLOBAL
      # =================================
-    st.subheader("Análisis de Categorías: Filtro Actual vs Comportamiento Global")
+    st.subheader("Volumen de ventas por campaña")
+    st.markdown("Filtrar por campaña")
     
     # Agrupamos la facturación del filtro activo
     cat_filtrado = df_filtrado.groupby("merchant_category")["amount"].sum().reset_index().rename(columns={"amount": "Filtro Seleccionado"})
     
     # Agrupamos la facturación del periodo completo (sin el filtro de campaña/categoría lateral)
-    cat_global = df_global_periodo.groupby("merchant_category")["amount"].sum().reset_index().rename(columns={"amount": "Total Mercado (Periodo)"})
+    cat_global = df_global_periodo.groupby("merchant_category")["amount"].sum().reset_index().rename(columns={"amount": "Total"})
     
     # Cruzamos los datos para generar el benchmark
     comparativa_cat = pd.merge(cat_global, cat_filtrado, on="merchant_category", how="left").fillna(0)
@@ -207,7 +208,7 @@ else:
     # =================================
 
     st.subheader("Análisis de Campañas por Categoría")
-    st.markdown("_Esta gráfica muestra cómo se distribuye la facturación entre las distintas campañas para la categoría y fechas seleccionadas._")
+    st.markdown("Filtrar por categoría")
 
     # Creamos un dataframe que aplique fechas y categoría, pero IGNORE el filtro de campaña lateral
     df_campanas = df_global_periodo.copy()
