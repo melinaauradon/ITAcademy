@@ -135,7 +135,7 @@ else:
     # =================================
     # VISUALIZACIÓN 1 : CANALES DE COMPRA
     # =================================
-    st.subheader("Canales más generadores de ingreso")
+    st.subheader("Campañas por Canal de Venta")
     ventas_canal_campania = (
         df_filtrado[df_filtrado["campaign_id"] != "NO_CAMPAIGN"]
         .groupby(["campaign_id", "channel"])["amount"]
@@ -149,7 +149,6 @@ else:
         x="campaign_id",
         y="amount",
         color="channel",
-        title="Análisis: Distribución de Campañas por Canal de Venta",
         labels={"campaign_id": "Campaña", "amount": "Facturación (€)", "channel": "Canal de Venta"},
         barmode="relative"
     )
