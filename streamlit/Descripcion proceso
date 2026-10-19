@@ -2,43 +2,38 @@ La aplicación se estructuró en una única página e incorpora:
 
 *Filtros interactivos en la barra lateral* (st.sidebar)
 
-Calendario
-Campañas
-Categorías de producto
+• Calendario
+• Campañas
+• Categorías de Producto
+• Botón de Borrado
 
 *KPIs*
 
-Facturación total : Permite medir el volumen global de negocio generado por la selección actual de filtros.
-Número de transacciones : Complementa la facturación mostrando el volumen de actividad comercial.
-Descuento medio aplicado :Permite evaluar con más detalle el comportamiento de los usuarios durante las campañas.
+• Facturación Total: Mide el volumen de ingresos según la combinación de filtros
+• Ticket Medio: Calcula el gasto promedio de un cliente por carrito
+• Descuento Medio: Evalúa el impacto económico de las promociones
 
 *Visualizaciones con Plotly*
-
-Facturación por canal
-Facturación por campaña
-Facturación por categoría
-Ticket medio por campaña
 
 Visualización 1: Facturación por canal
 ¿Qué canal genera más ingresos? (online, store, marketplace)
 
-Permite identificar los canales que impulsan el negocio y sirve como punto de partida para asignación de recursos comerciales.
+Muestra un diagrama de barras apiladas para identificar qué canales impulsan mejor cada campaña (excluyendo NO_CAMPAIGN).
 
 
-Visualización 2: Facturación por campaña
-¿Qué campañas generan más ingresos?
+Visualización 2: Impacto de las campañas sobre las ventas por categoría (Filtro Actual vs. Comportamiento Global)
+¿Qué peso tiene una campaña sobre las ventas de una categoria?
 
-Permite evaluar el impacto económico de las acciones de marketing y detectar campañas especialmente rentables.
-nota : excluimos el valor NO_CAMPAIGN para evitar que transacciones sin campaña distorsionaran la comparación.
-
+Escogiendo una campaña, se muestran las categorías, comparando cuánto se vendió con dicha campaña frente al total de v.
 
 Visualización 3: Facturación por categoría
-¿Qué categorías de producto aportan más ingresos?
+¿Cuál es el rango de compra típico en cada línea de producto?
 
-La facturación se agrupa por merchant_category, permitiendo identificar e enfocar estrategias comerciales en las líneas de negocio más relevantes.
+Muestra de forma agrupada los percentiles. Permite entender el comportamiento del 50% central obviando los outliers.
 
 
-Visualización 4: Ticket medio por campaña
-¿Qué campañas consiguen compras de mayor valor?
+Visualización 4: Análisis de Campañas por Categoría
+¿Qué campaña ha impulsado mas ventas segun la categoría?
 
-Mientras que la visualización de facturación muestra el volumen económico total, el ticket medio permite distinguir en que campañas los usuarios realizan compras más caras.
+Escogiendo una categoria, se muestran las campañas ordenadas de mayor a menor facturación.
+
