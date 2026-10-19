@@ -128,10 +128,10 @@ if df_filtrado.empty:
     st.warning("⚠️ No hay datos disponibles para la combinación de filtros seleccionada.")
 else:
     # =================================
-    # VISUALIZACIÓN 1 (YA APLICADA POR TI)
+    # VISUALIZACIÓN 1
     # AFINIDAD DE CANAL POR CAMPAÑA
     # =================================
-    st.subheader("🎯 Distribución Omnicanal")
+    st.subheader("Distribución por canal")
     ventas_canal_campania = (
         df_filtrado[df_filtrado["campaign_id"] != "NO_CAMPAIGN"]
         .groupby(["campaign_id", "channel"])["amount"]
@@ -157,7 +157,7 @@ else:
     # VISUALIZACIÓN 2 & 3: COMPARATIVA VS MERCADO GLOBAL
     # (Evita el sesgo del filtro atrapado)
     # =================================
-    st.subheader("🛍️ Análisis de Categorías: Filtro Actual vs Comportamiento Global")
+    st.subheader("Análisis de Categorías: Filtro Actual vs Comportamiento Global")
     
     # Agrupamos la facturación del filtro activo
     cat_filtrado = df_filtrado.groupby("merchant_category")["amount"].sum().reset_index().rename(columns={"amount": "Filtro Seleccionado"})
@@ -181,9 +181,8 @@ else:
 
     # =================================
     # VISUALIZACIÓN 4: RANGOS POR PERCENTIL
-    # (Sustituye a Min/Max para eliminar ruidos y Outliers)
     # =================================
-    st.subheader("📊 Distribución Real del Gasto por Categoría (Sin Outliers)")
+    st.subheader("Distribución del Gasto por Categoría (Sin Outliers)")
     st.markdown("_Esta gráfica muestra los percentiles 25, 50 (Mediana) y 75 para entender el rango de compra del 50% central de los clientes, esquivando transacciones anómalas._")
 
     df_rangos = df_filtrado.groupby('merchant_category')['amount'].agg([
