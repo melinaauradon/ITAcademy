@@ -25,7 +25,7 @@ st.title(" Dashboard Comercial")
 
 st.markdown(
     """
-    Análisis de ventas por canal, campaña y categoría de producto.
+    Análisis de ventas por campaña y categoría de producto.
     """
 )
 # =================================
