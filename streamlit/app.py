@@ -200,7 +200,7 @@ else:
         labels={'value': 'Importe (€)', 'merchant_category': 'Categoría', 'variable': 'Métrica'}
     )
     fig3.update_layout(hovermode="x unified")
-    st.plotly_chart(fig4, use_container_width=True)
+    st.plotly_chart(fig3, use_container_width=True)
 
     # =================================
     # VISUALIZACIÓN 4 : CAMPAÑAS POR CATEGORÍA
