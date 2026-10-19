@@ -32,39 +32,54 @@ st.markdown(
 # FILTROS
 # =================================
 
+# =================================
+# FILTROS
+# =================================
+
 st.sidebar.header("Filtros")
 
-# 1. Filtro de Tiempo (Rango de fechas)
-
+# Cálculo de valores por defecto de las fechas
 timestamp_datetime = pd.to_datetime(df_full["timestamp"], errors="coerce")
-
 fecha_minima = timestamp_datetime.min().date()
 fecha_maxima = timestamp_datetime.max().date()
 
+# Opciones de los selectbox
+campanas_opciones = ["Todos"] + sorted(df_full["campaign_id"].dropna().unique().tolist())
+categorias_opciones = ["Todos"] + sorted(df_full["merchant_category"].dropna().unique().tolist())
 
+# Inicializar los estados de los filtros si no existen
+if "rango_fechas" not in st.session_state:
+    st.session_state.rango_fechas = (fecha_minima, fecha_maxima)
+if "campana" not in st.session_state:
+    st.session_state.campana = "Todos"
+if "categoria" not in st.session_state:
+    st.session_state.categoria = "Todos"
+
+# Botón para borrar/reiniciar los filtros
+if st.sidebar.button("Borrar Filtros", use_container_width=True):
+    st.session_state.rango_fechas = (fecha_minima, fecha_maxima)
+    st.session_state.campana = "Todos"
+    st.session_state.categoria = "Todos"
+    st.rerun() # Recarga la app para aplicar el reinicio visual instantáneamente
+
+# Renderizado de los inputs conectados al session_state
 rango_fechas = st.sidebar.date_input(
     "Rango de Fechas",
-    value=(fecha_minima, fecha_maxima), # Por defecto muestra todo el rango
+    key="rango_fechas",
     min_value=fecha_minima,
     max_value=fecha_maxima,
 )
 
-# Filtro de Campaña
-campanas = ["Todos"] + sorted(
-    df_full["campaign_id"].dropna().unique().tolist()
-)
 campana = st.sidebar.selectbox(
     "Campaña",
-    campanas
+    options=campanas_opciones,
+    key="campana"
 )
 
-# Filtro de Categoría
-categorias = ["Todos"] + sorted(
-    df_full["merchant_category"].dropna().unique().tolist()
-)
 categoria = st.sidebar.selectbox(
     "Categoría",
-    categorias
+    options=categorias_opciones,
+    key="categoria"
 )
 
 # =================================
