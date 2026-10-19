@@ -157,25 +157,24 @@ else:
     st.markdown("---")
 
     # =================================
-    # VISUALIZACIÓN 2 & 3: COMPARATIVA VS MERCADO GLOBAL
-    # (Evita el sesgo del filtro atrapado)
-    # =================================
+    # VISUALIZACIÓN 2: FILTRO VS GLOBAL
+     # =================================
     st.subheader("Análisis de Categorías: Filtro Actual vs Comportamiento Global")
     
     # Agrupamos la facturación del filtro activo
     cat_filtrado = df_filtrado.groupby("merchant_category")["amount"].sum().reset_index().rename(columns={"amount": "Filtro Seleccionado"})
+    
     # Agrupamos la facturación del periodo completo (sin el filtro de campaña/categoría lateral)
     cat_global = df_global_periodo.groupby("merchant_category")["amount"].sum().reset_index().rename(columns={"amount": "Total Mercado (Periodo)"})
     
     # Cruzamos los datos para generar el benchmark
     comparativa_cat = pd.merge(cat_global, cat_filtrado, on="merchant_category", how="left").fillna(0)
 
-    fig3 = px.bar(
+    fig2 = px.bar(
         comparativa_cat, 
         x="merchant_category", 
         y=["Total Mercado (Periodo)", "Filtro Seleccionado"],
         barmode="group",
-        title="Aporte del Filtro/Campaña seleccionado al Total de cada Categoría",
         labels={"value": "Facturación (€)", "merchant_category": "Categoría", "variable": "Ámbito"}
     )
     st.plotly_chart(fig3, use_container_width=True)
@@ -183,30 +182,28 @@ else:
     st.markdown("---")
 
     # =================================
-    # VISUALIZACIÓN 4: RANGOS POR PERCENTIL
+    # VISUALIZACIÓN 3: RANGOS POR PERCENTIL
     # =================================
-    st.subheader("Distribución del Gasto por Categoría (Sin Outliers)")
-    st.markdown("_Esta gráfica muestra los percentiles 25, 50 (Mediana) y 75 para entender el rango de compra del 50% central de los clientes, esquivando transacciones anómalas._")
-
+    st.subheader("Gasto por Categoría")
+    
     df_rangos = df_filtrado.groupby('merchant_category')['amount'].agg([
         ('Percentil 25', lambda x: x.quantile(0.25)),
         ('Mediana (P50)', 'median'),
         ('Percentil 75', lambda x: x.quantile(0.75))
     ]).reset_index()
 
-    fig4 = px.bar(
+    fig3 = px.bar(
         df_rangos,
         x='merchant_category',
         y=['Percentil 25', 'Mediana (P50)', 'Percentil 75'],
         barmode='group',
-        title='Rango de Compra Típico por Categoría',
         labels={'value': 'Importe (€)', 'merchant_category': 'Categoría', 'variable': 'Métrica'}
     )
-    fig4.update_layout(hovermode="x unified")
+    fig3.update_layout(hovermode="x unified")
     st.plotly_chart(fig4, use_container_width=True)
 
     # =================================
-    # VISUALIZACIÓN 5 : CAMPAÑAS POR CATEGORÍA
+    # VISUALIZACIÓN 4 : CAMPAÑAS POR CATEGORÍA
     # =================================
 
     st.subheader("Análisis de Campañas por Categoría")
@@ -224,7 +221,7 @@ else:
         .sort_values("amount", ascending=False)
     )
 
-    fig_5 = px.bar(
+    fig_4 = px.bar(
         facturacion_por_campana,
         x="campaign_id",
         y="amount",
@@ -233,8 +230,8 @@ else:
         text_auto=",.0f" # Muestra el valor encima de las barras formateado
     )
  
-    fig_5.update_traces(textposition="outside", marker_color="#1f77b4")
-    fig_5.update_layout(xaxis_tickangle=-45)
+    fig_4.update_traces(textposition="outside", marker_color="#1f77b4")
+    fig_4.update_layout(xaxis_tickangle=-45)
     
     
     st.plotly_chart(fig_campanas, use_container_width=True)
