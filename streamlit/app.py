@@ -110,38 +110,32 @@ if categoria != "Todos":
 facturacion = df_filtrado['amount'].sum()
 total_tx = df_filtrado['id_tx'].nunique()
 
-# 1. Ticket Medio  (promedio por id transaccion)
+# 1. Ticket Medio Real (Evita el sesgo si una transacción tiene múltiples filas por producto)
 ticket_medio = facturacion / total_tx if total_tx > 0 else 0
 
-# 2. Descuento Medio (filtramos solo las transacciones que tuvieron descuento)
-df_con_descuento = df_filtrado[df_filtrado['discount_amount'] > 0]
-descuento_medio_real = df_con_descuento['discount_amount'].mean() if len(df_con_descuento) > 0 else 0
+# 2. Descuento Medio Real
+descuento_medio_real = df_filtrado['discount_amount'].mean() if len(df_filtrado) > 0 else 0
 
-# 3. Porcentaje de penetración de las promociones
-ratio_promocional = (df_con_descuento['id_tx'].nunique() / total_tx * 100) if total_tx > 0 else 0
-
-# Renderizado de métricas
-col1, col2, col3, col4 = st.columns(4)
+# Renderizado de métricas en 3 columnas
+col1, col2, col3 = st.columns(3)
 with col1:
     st.metric("Facturación Total", f"{facturacion:,.0f} €".replace(",", "."))
 with col2:
     st.metric("Ticket Medio Real", f"{ticket_medio:,.2f} €".replace(",", "."))
 with col3:
-    st.metric("Descuento Medio (Si aplica)", f"{descuento_medio_real:,.2f} €".replace(",", "."))
-with col4:
-    st.metric("% Ventas con Descuento", f"{ratio_promocional:,.1f} %")
+    st.metric("Descuento Medio", f"{descuento_medio_real:,.2f} €".replace(",", "."))
 
 st.markdown("---")
 
-# Control de datos vacíos: si el cruce de filtros deja el dataset sin filas, frena errores visuales
+# si el cruce de filtros deja el dataset sin filas, no da error
 if df_filtrado.empty:
     st.warning("⚠️ No hay datos disponibles para la combinación de filtros seleccionada.")
 else:
+    
     # =================================
-    # VISUALIZACIÓN 1
-    # AFINIDAD DE CANAL POR CAMPAÑA
+    # VISUALIZACIÓN 1 : CANALES DE COMPRA
     # =================================
-    st.subheader("Distribución por canal")
+    st.subheader("Canales más generadores de ingreso")
     ventas_canal_campania = (
         df_filtrado[df_filtrado["campaign_id"] != "NO_CAMPAIGN"]
         .groupby(["campaign_id", "channel"])["amount"]
@@ -155,7 +149,7 @@ else:
         x="campaign_id",
         y="amount",
         color="channel",
-        title="Análisis Omnicanal: Distribución de Campañas por Canal de Venta",
+        title="Análisis: Distribución de Campañas por Canal de Venta",
         labels={"campaign_id": "Campaña", "amount": "Facturación (€)", "channel": "Canal de Venta"},
         barmode="relative"
     )
@@ -213,7 +207,7 @@ else:
     st.plotly_chart(fig4, use_container_width=True)
 
     # =================================
-    # NUEVA VISUALIZACIÓN: FACTURACIÓN POR CAMPAÑA (FILTRADO POR CATEGORÍA)
+    VISUALIZACIÓN 5: FACTURACIÓN POR CAMPAÑA (FILTRADO POR CATEGORÍA)
     # =================================
 
     st.subheader("Análisis de Campañas por Categoría")
