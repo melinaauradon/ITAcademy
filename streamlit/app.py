@@ -183,25 +183,39 @@ else:
     st.markdown("---")
 
     # =================================
-    # VISUALIZACIÓN 3: RANGOS POR PERCENTIL
+    # VISUALIZACIÓN 3: TICKET MEDIO POR CAMPAÑA
     # =================================
-    st.subheader("Gasto por Categoría")
-    
-    df_rangos = df_filtrado.groupby('merchant_category')['amount'].agg([
-        ('Percentil 25', lambda x: x.quantile(0.25)),
-        ('Mediana (P50)', 'median'),
-        ('Percentil 75', lambda x: x.quantile(0.75))
-    ]).reset_index()
+    st.subheader("Ticket Medio por Campaña")
+    st.markdown("Filtrar por categoría")
 
-    fig3 = px.bar(
-        df_rangos,
-        x='merchant_category',
-        y=['Percentil 25', 'Mediana (P50)', 'Percentil 75'],
-        barmode='group',
-        labels={'value': 'Importe (€)', 'merchant_category': 'Categoría', 'variable': 'Métrica'}
+    # Creamos un dataframe que aplique fechas y categoría, pero IGNORE el filtro de campaña lateral
+    df_campanas = df_global_periodo.copy()
+    if categoria != "Todos":
+        df_campanas = df_campanas[df_campanas["merchant_category"] == categoria]
+
+    # Calculamos el ticket medio (mean) en lugar de la facturación total (sum)
+    ticket_medio_por_campana = (
+        df_campanas.groupby("campaign_id")["amount"]
+        .mean()
+        .reset_index()
+        .sort_values("amount", ascending=False)
     )
-    fig3.update_layout(hovermode="x unified")
-    st.plotly_chart(fig3, use_container_width=True)
+
+    fig_3 = px.bar(
+        ticket_medio_por_campana,
+        x="campaign_id",
+        y="amount",
+        title=f"Ticket Medio por Campaña - Categoría: {categoria}",
+        labels={"campaign_id": "Campaña", "amount": "Ticket Medio (€)"},
+        text_auto=",.2f" # Cambiado a .2f para mostrar dos decimales (céntimos), ideal para ticket medio
+    )
+ 
+    fig_3.update_traces(textposition="outside", marker_color="#1f77b4")
+    fig_3.update_layout(xaxis_tickangle=-45)
+    
+    st.plotly_chart(fig_3, use_container_width=True)
+
+
 
     # =================================
     # VISUALIZACIÓN 4 : CAMPAÑAS POR CATEGORÍA
@@ -235,38 +249,3 @@ else:
     fig_4.update_layout(xaxis_tickangle=-45)
     
     st.plotly_chart(fig_4, use_container_width=True)
-
-    # =================================
-    # VISUALIZACIÓN 4 : CAMPAÑAS POR CATEGORÍA
-    # =================================
-    st.subheader("Ticket Medio por Campaña")
-    st.markdown("Filtrar por categoría")
-
-    # Creamos un dataframe que aplique fechas y categoría, pero IGNORE el filtro de campaña lateral
-    df_campanas = df_global_periodo.copy()
-    if categoria != "Todos":
-        df_campanas = df_campanas[df_campanas["merchant_category"] == categoria]
-
-    # Calculamos el ticket medio (mean) en lugar de la facturación total (sum)
-    ticket_medio_por_campana = (
-        df_campanas.groupby("campaign_id")["amount"]
-        .mean()
-        .reset_index()
-        .sort_values("amount", ascending=False)
-    )
-
-    fig_5 = px.bar(
-        ticket_medio_por_campana,
-        x="campaign_id",
-        y="amount",
-        title=f"Ticket Medio por Campaña - Categoría: {categoria}",
-        labels={"campaign_id": "Campaña", "amount": "Ticket Medio (€)"},
-        text_auto=",.2f" # Cambiado a .2f para mostrar dos decimales (céntimos), ideal para ticket medio
-    )
- 
-    fig_5.update_traces(textposition="outside", marker_color="#1f77b4")
-    fig_5.update_layout(xaxis_tickangle=-45)
-    
-    st.plotly_chart(fig_5, use_container_width=True)
-
-
