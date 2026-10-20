@@ -150,7 +150,8 @@ else:
         y="amount",
         color="channel",
         labels={"campaign_id": "Campaña", "amount": "Facturación (€)", "channel": "Canal de Venta"},
-        barmode="relative"
+        barmode="relative",
+        text_auto=",.0f"
     )
     st.plotly_chart(fig1, use_container_width=True)
 
@@ -176,7 +177,8 @@ else:
         x="merchant_category", 
         y=["Total", "Filtro Seleccionado"],
         barmode="group",
-        labels={"value": "Facturación (€)", "merchant_category": "Categoría", "variable": "Ámbito"}
+        labels={"value": "Facturación (€)", "merchant_category": "Categoría", "variable": "Ámbito"},
+        text_auto=",.0f"
     )
     st.plotly_chart(fig2, use_container_width=True)
 
