@@ -209,9 +209,6 @@ else:
         labels={"campaign_id": "Campaña", "amount": "Ticket Medio (€)"},
         text_auto=",.2f" # Cambiado a .2f para mostrar dos decimales (céntimos), ideal para ticket medio
     )
- 
-    fig_3.update_traces(textposition="outside", marker_color="#1f77b4")
-    fig_3.update_layout(xaxis_tickangle=-45)
     
     st.plotly_chart(fig_3, use_container_width=True)
 
@@ -245,7 +242,4 @@ else:
         text_auto=",.0f" # Muestra el valor encima de las barras formateado
     )
  
-    fig_4.update_traces(textposition="outside", marker_color="#1f77b4")
-    fig_4.update_layout(xaxis_tickangle=-45)
-    
     st.plotly_chart(fig_4, use_container_width=True)
