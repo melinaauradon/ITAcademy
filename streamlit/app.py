@@ -239,7 +239,7 @@ else:
     # =================================
     # VISUALIZACIÓN 4 : CAMPAÑAS POR CATEGORÍA
     # =================================
-    st.subheader("Análisis de Ticket Medio por Campaña")
+    st.subheader("Ticket Medio por Campaña")
     st.markdown("Filtrar por categoría")
 
     # Creamos un dataframe que aplique fechas y categoría, pero IGNORE el filtro de campaña lateral
