@@ -121,7 +121,7 @@ col1, col2, col3 = st.columns(3)
 with col1:
     st.metric("Facturación Total", f"{facturacion:,.0f} €".replace(",", "."))
 with col2:
-    st.metric("Ticket Medio Real", f"{ticket_medio:,.2f} €".replace(",", "."))
+    st.metric("Ticket Medio", f"{ticket_medio:,.2f} €".replace(",", "."))
 with col3:
     st.metric("Descuento Medio", f"{descuento_medio_real:,.2f} €".replace(",", "."))
 
