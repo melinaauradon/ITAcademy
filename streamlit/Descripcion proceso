@@ -1,4 +1,4 @@
-https://itacademy-rbuylyrjr9cwi3cgvv4uyj.streamlit.app/
+Dashboard commercial, enlace: https://itacademy-rbuylyrjr9cwi3cgvv4uyj.streamlit.app/
 
 La aplicación se estructuró en una única página e incorpora:
 
@@ -36,7 +36,12 @@ Muestra de forma agrupada los percentiles. Permite entender el comportamiento de
 
 
 Visualización 4: Análisis de Campañas por Categoría
-¿Qué campaña ha impulsado mas ventas segun la categoría?
+¿Qué campaña ha impulsado mas ventas en la categorías?
 
 Escogiendo una categoria, se muestran las campañas ordenadas de mayor a menor facturación.
+
+
+ps: Hemos incluido tanto las transacciones aceptadas como las denegadas. Desde una perspectiva comercial orientada a identificar los motores de venta, nos interesa analizar el interés real del cliente por el producto, independientemente de si el pago se completó con éxito.
+
+
 
